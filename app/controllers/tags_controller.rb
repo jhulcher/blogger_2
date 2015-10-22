@@ -5,10 +5,7 @@ class TagsController < ApplicationController
   def index
     @all_tags = Tag.all
   end
-  def destroy
-    Article.find(params[:id]).destroy
-    redirect_to article_path(@article)
-  end
+  before_filter :require_login, only: [:destroy]
   def destroy
     Tag.find(params[:id]).destroy
     redirect_to article_path(@article)
